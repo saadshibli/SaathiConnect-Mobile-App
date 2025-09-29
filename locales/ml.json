@@ -1,0 +1,20 @@
+{
+  "languageScreen": {
+    "title": "SaathiConnect-ലേക്ക് സ്വാഗതം",
+    "subtitle": "ആരംഭിക്കാൻ ഭാഷ തിരഞ്ഞെടുക്കൂ!",
+    "buttonContinue": "തുടരുക"
+  },
+  "welcomeScreen": {
+    "welcomeMessage": "പൗരപ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യൂ, പുരസ്കാരങ്ങൾ നേടൂ, ഒരു നല്ല നഗരം നിർമ്മിക്കൂ.",
+    "register": "ഇമെയിൽ ഉപയോഗിച്ച് രജിസ്റ്റർ ചെയ്യുക",
+    "login": "ലോഗിൻ",
+    "googleSignIn": "Google ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക",
+    "continueAsGuest": "അതിഥിയായി തുടരുക"
+  },
+  "loginScreen": {
+    "title": "തിരികെ വന്നതിൽ സ്വാഗതം"
+  },
+  "registerScreen": {
+    "title": "അക്കൗണ്ട് സൃഷ്ടിക്കുക"
+  }
+}

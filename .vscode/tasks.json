@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install expo-notifications",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"i",
+				"expo-notifications@~0.29.12"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		}
+	]
+}

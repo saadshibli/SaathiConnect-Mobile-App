@@ -1,0 +1,23 @@
+{
+  "languageScreen": {
+    "title": "Welcome to SaathiConnect",
+    "subtitle": "Choose the language to get started!",
+    "buttonContinue": "Continue"
+  },
+  "welcomeScreen": {
+    "welcomeMessage": "Report civic issues, earn rewards, and build a better city.",
+    "register": "Register with Email",
+    "login": "Login",
+    "googleSignIn": "Sign in with Google",
+    "continueAsGuest": "Continue as a Guest"
+  },
+  "loginScreen": {
+    "title": "Welcome Back"
+  },
+  "registerScreen": {
+    "title": "Create Account"
+  },
+  "homeScreen": {
+    "title": "Welcome to SaathiConnect"
+  }
+}

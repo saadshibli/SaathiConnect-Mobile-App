@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "279123607223",
+    "project_id": "sih-civic-issue-app",
+    "storage_bucket": "sih-civic-issue-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279123607223:android:faa21f4c98677a06075732",
+        "android_client_info": {
+          "package_name": "Saathi.Connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuZENyfDgXLRymFqOOppjbWJYjy5HHq1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
