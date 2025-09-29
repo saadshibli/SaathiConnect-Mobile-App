@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "279123607223",
-    "project_id": "sih-civic-issue-app",
-    "storage_bucket": "sih-civic-issue-app.firebasestorage.app"
+    "project_number": "920750722511",
+    "project_id": "saathi-connect-52a4e",
+    "storage_bucket": "saathi-connect-52a4e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:279123607223:android:faa21f4c98677a06075732",
+        "mobilesdk_app_id": "1:920750722511:android:17b35cd1228e3d5891d6ba",
         "android_client_info": {
-          "package_name": "Saathi.Connect"
+          "package_name": "com.saad.saathiconnect"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCuZENyfDgXLRymFqOOppjbWJYjy5HHq1w"
+          "current_key": "AIzaSyAMyDcqYBLhSo71YnAJLJ_AkBH1ONEf7kA"
         }
       ],
       "services": {
