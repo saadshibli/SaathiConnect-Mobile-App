@@ -36,7 +36,13 @@
       "expo-secure-store",
       "expo-localization",
       "expo-font",
-      "expo-audio"
+      "expo-audio",
+      "expo-build-properties",
+      {
+        "android": {
+          "enableJetifier": true
+        }
+      }
     ],
     "extra": {
       "router": {},
