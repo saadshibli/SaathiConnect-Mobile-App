@@ -5,12 +5,12 @@ const {
 } = require('@expo/config-plugins');
 
 module.exports = function withAndroidComponentFactory(config) {
-  // Ensure AndroidX + Jetifier
+  // AndroidX + Jetifier (redundant with expo-build-properties, but harmless)
   withGradleProperties(config, (c) => {
     const props = c.modResults;
     const setProp = (key, value) => {
-      const existing = props.find((p) => p.key === key);
-      if (existing) existing.value = String(value);
+      const found = props.find((p) => p.key === key);
+      if (found) found.value = String(value);
       else props.push({ type: 'property', key, value: String(value) });
     };
     setProp('android.useAndroidX', true);
@@ -18,40 +18,38 @@ module.exports = function withAndroidComponentFactory(config) {
     return c;
   });
 
-  // Manifest: prefer AndroidX factory
+  // Manifest: prefer AndroidX CoreComponentFactory and replace conflicts
   withAndroidManifest(config, (c) => {
     const manifest = c.modResults;
     if (!manifest.manifest.$) manifest.manifest.$ = {};
     manifest.manifest.$['xmlns:tools'] = 'http://schemas.android.com/tools';
 
-    const appEl =
+    const app =
       (manifest.manifest.application && manifest.manifest.application[0]) ||
       (manifest.manifest.application = [{ $: {} }])[0];
 
-    if (!appEl.$) appEl.$ = {};
-    appEl.$['android:appComponentFactory'] = 'androidx.core.app.CoreComponentFactory';
-    const currentReplace = appEl.$['tools:replace'] || '';
-    const parts = new Set(
-      currentReplace
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
+    if (!app.$) app.$ = {};
+    app.$['android:appComponentFactory'] = 'androidx.core.app.CoreComponentFactory';
+
+    const cur = app.$['tools:replace'] || '';
+    const set = new Set(
+      cur.split(',').map((s) => s.trim()).filter(Boolean)
     );
-    parts.add('android:appComponentFactory');
-    appEl.$['tools:replace'] = Array.from(parts).join(',');
+    set.add('android:appComponentFactory');
+    app.$['tools:replace'] = Array.from(set).join(',');
 
     return c;
   });
 
-  // Exclude legacy support libs that cause duplicate classes
+  // Gradle: exclude legacy support libs to avoid duplicate classes
   withAppBuildGradle(config, (c) => {
-    const needle = "exclude group: 'com.android.support'";
-    if (!c.modResults.contents.includes(needle)) {
+    const marker = '/* auto-added by withAndroidComponentFactory */';
+    if (!c.modResults.contents.includes(marker)) {
       c.modResults.contents += `
 
-/* auto-added by withAndroidComponentFactory */
+${marker}
 configurations.all {
-    ${needle}
+    exclude group: 'com.android.support'
 }
 `;
     }
