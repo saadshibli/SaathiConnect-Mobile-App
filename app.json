@@ -38,7 +38,21 @@
       "expo-font",
       "expo-audio",
       "expo-build-properties",
-      "./withAndroidComponentFactory.js"
+      "./withAndroidComponentFactory.js",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableJetifier": true,
+            "packagingOptions": {
+              "pickFirst": [
+                "**/libjsc.so",
+                "**/libc++_shared.so"
+              ]
+            }
+          }
+        }
+      ]
     ],
     "extra": {
       "router": {},
