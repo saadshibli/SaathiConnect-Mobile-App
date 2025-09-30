@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 // This is the "street address" of your backend server running on your laptop.
 // To find this, open a new terminal and type `ipconfig` (Windows) or `ifconfig` (Mac).
 // Look for the "IPv4 Address".
-const LOCAL_DEV_URL = 'http://saathi-connect-env.eba-jqvfmbez.ap-south-1.elasticbeanstalk.com/';
+const LOCAL_DEV_URL = 'http://Saathi-connect-app-env.eba-4j2pkbeb.ap-south-1.elasticbeanstalk.com/';
 
 const apiClient = axios.create({
     baseURL: LOCAL_DEV_URL
