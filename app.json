@@ -37,14 +37,8 @@
       "expo-localization",
       "expo-font",
       "expo-audio",
-      [
-        "expo-build-properties",
-          {
-            "android": {
-              "enableJetifier": true
-            }
-          }
-      ]
+      "expo-build-properties",
+      "./withAndroidComponentFactory.js"
     ],
     "extra": {
       "router": {},
