@@ -1,27 +1,62 @@
-// /withAppComponentFactoryFix.js
-const { withAndroidManifest } = require('@expo/config-plugins');
+const {
+  withAndroidManifest,
+  withAppBuildGradle,
+  withGradleProperties,
+} = require('@expo/config-plugins');
 
-module.exports = function withAppComponentFactoryFix(config) {
-  return withAndroidManifest(config, (config) => {
-    const manifest = config.modResults;
+module.exports = function withAndroidComponentFactory(config) {
+  // Ensure AndroidX + Jetifier
+  withGradleProperties(config, (c) => {
+    const props = c.modResults;
+    const setProp = (key, value) => {
+      const existing = props.find((p) => p.key === key);
+      if (existing) existing.value = String(value);
+      else props.push({ type: 'property', key, value: String(value) });
+    };
+    setProp('android.useAndroidX', true);
+    setProp('android.enableJetifier', true);
+    return c;
+  });
 
-    // Ensure the tools namespace exists on <manifest>
+  // Manifest: prefer AndroidX factory
+  withAndroidManifest(config, (c) => {
+    const manifest = c.modResults;
     if (!manifest.manifest.$) manifest.manifest.$ = {};
     manifest.manifest.$['xmlns:tools'] = 'http://schemas.android.com/tools';
 
-    // Find the <application> element
-    const app = manifest.manifest.application?.[0];
-    if (!app) return config;
+    const appEl =
+      (manifest.manifest.application && manifest.manifest.application[0]) ||
+      (manifest.manifest.application = [{ $: {} }])[0];
 
-    if (!app.$) app.$ = {};
+    if (!appEl.$) appEl.$ = {};
+    appEl.$['android:appComponentFactory'] = 'androidx.core.app.CoreComponentFactory';
+    const currentReplace = appEl.$['tools:replace'] || '';
+    const parts = new Set(
+      currentReplace
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    );
+    parts.add('android:appComponentFactory');
+    appEl.$['tools:replace'] = Array.from(parts).join(',');
 
-    // Prefer AndroidX factory and tell merger to replace
-    app.$['android:appComponentFactory'] = 'androidx.core.app.CoreComponentFactory';
-    app.$['tools:replace'] = [
-      app.$['tools:replace'],
-      'android:appComponentFactory',
-    ].filter(Boolean).join(',');
-
-    return config;
+    return c;
   });
+
+  // Exclude legacy support libs that cause duplicate classes
+  withAppBuildGradle(config, (c) => {
+    const needle = "exclude group: 'com.android.support'";
+    if (!c.modResults.contents.includes(needle)) {
+      c.modResults.contents += `
+
+/* auto-added by withAndroidComponentFactory */
+configurations.all {
+    ${needle}
+}
+`;
+    }
+    return c;
+  });
+
+  return config;
 };
