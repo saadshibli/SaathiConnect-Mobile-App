@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import React, { useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
